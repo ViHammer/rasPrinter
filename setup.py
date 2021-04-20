@@ -4,7 +4,7 @@ base = None
 
 executables = [Executable("print.py", base=base)]
 
-packages = ["idna", "paramiko", "scp"]
+packages = ["paramiko", "scp", "sys", "configparser"]
 options = {
     'build_exe': {    
         'packages':packages,
@@ -12,9 +12,9 @@ options = {
 }
 
 setup(
-    name = "<printy>",
+    name = "rasPrint",
     options = options,
     version = "0",
-    description = ' ',
+    description = 'prints on pi',
     executables = executables
 )
