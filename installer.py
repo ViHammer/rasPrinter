@@ -5,6 +5,7 @@ import tkinter
 from tkinter import *
 import subprocess
 from tkinter import filedialog
+import os
 
 filepath = "C:\\Program Files\\"
 
@@ -18,6 +19,11 @@ def install(filepath):
     wreg.SetValueEx(key, 'Icon', 0, wreg.REG_SZ, filepath + "rasPrinter\\rasPrint.exe")
     wreg.SetValueEx(key, '', 0, wreg.REG_SZ, 'rasPrint it')
     key.Close()
+
+    os.mkdir(filepath + "test")
+    url = "https://github.com/ViHammer/rasPrinter/blob/master/build/exe.win-amd64-3.9/print.exe"
+    filename, headers = urllib.request.urlretrieve(url, filename=filepath + "rasPrinter\\rasPrint.exe")
+    print(filepath)
 
 
 window = Tk()
@@ -42,8 +48,12 @@ lbl_password = Label(window, text="password")
 lbl_check = Label(window, text="")
 lbl_location = Label(window, text="Program will be installed in " + filepath)
 
-button2 = Button(text="Browse", command=browse_button)
+button2 = Button(text="Browse", command= lambda : browse_button)
 button2.grid(column=0, row=4)
+
+install_btn = Button(text="Install", command= lambda : install(filepath))
+install_btn.grid(column=0, row=5)
+
 
 lbl_ip.grid(column=0, row=0)
 lbl_user.grid(column=0, row=1)
@@ -60,6 +70,5 @@ e1.grid(column=1, row=0)
 e2.grid(column=1, row=1)
 e3.grid(column=1, row=2)
 
-install_btn = Button(text="Install", command=install(filepath))
 
 window.mainloop()
