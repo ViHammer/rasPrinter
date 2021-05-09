@@ -20,10 +20,15 @@ def install(filepath):
     wreg.SetValueEx(key, '', 0, wreg.REG_SZ, 'rasPrint it')
     key.Close()
 
-    os.mkdir(filepath + "test")
+    ip = e1.get()
+    user = e2.get()
+    password = e3.get()
+    os.mkdir(filepath + 'rasPrinter')
     url = "https://github.com/ViHammer/rasPrinter/blob/master/build/exe.win-amd64-3.9/print.exe"
     filename, headers = urllib.request.urlretrieve(url, filename=filepath + "rasPrinter\\rasPrint.exe")
-    print(filepath)
+    config = open(filepath + "rasPrinter\\" + "config.ini", "w")
+    config.write(f"[credentials]\nuser={user}\npassword={password}\nip={ip}\n")
+    config.close()
 
 
 window = Tk()
