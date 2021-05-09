@@ -10,10 +10,12 @@ import os
 filepath = "C:\\Program Files\\"
 
 def browse_button():
-    filepath = filedialog.askdirectory()
+    global filepath 
+    filepath = filedialog.askdirectory() + "\\"
     lbl_location.config(text="Program will be installed in " + filepath)
 
 def install(filepath):
+    print(filepath)
     key = wreg.CreateKey(wreg.HKEY_CLASSES_ROOT, r"*\shell\rasPrinter")
     wreg.SetValue(key, 'command', wreg.REG_SZ, filepath + "rasPrinter\\rasPrint.exe\" \"%1\"")
     wreg.SetValueEx(key, 'Icon', 0, wreg.REG_SZ, filepath + "rasPrinter\\rasPrint.exe")
@@ -53,7 +55,7 @@ lbl_password = Label(window, text="password")
 lbl_check = Label(window, text="")
 lbl_location = Label(window, text="Program will be installed in " + filepath)
 
-button2 = Button(text="Browse", command= lambda : browse_button)
+button2 = Button(text="Browse", command= lambda : browse_button())
 button2.grid(column=0, row=4)
 
 install_btn = Button(text="Install", command= lambda : install(filepath))

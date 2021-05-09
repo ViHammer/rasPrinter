@@ -2,9 +2,9 @@ from cx_Freeze import setup, Executable
 
 base = None    
 
-executables = [Executable("print.py", base=base)]
+executables = [Executable("installer.py", base=base)]
 
-packages = ["paramiko", "scp", "sys", "configparser"]
+packages = ["winreg", "pathlib", "urllib.request", "tkinter", "subprocess", "os"]
 options = {
     'build_exe': {    
         'packages':packages,
@@ -12,9 +12,9 @@ options = {
 }
 
 setup(
-    name = "rasPrint",
+    name = "rasPrint installer",
     options = options,
     version = "0",
-    description = 'prints on pi',
+    description = 'installs rasPrinter',
     executables = executables
 )
